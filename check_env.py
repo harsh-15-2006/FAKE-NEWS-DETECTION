@@ -1,5 +1,5 @@
 """
-SATYA environment check.
+FACTORA environment check.
 
 Run:  python check_env.py
 
@@ -146,7 +146,7 @@ def check_network():
 
 
 if __name__ == "__main__":
-    print("\nSATYA ENVIRONMENT CHECK")
+    print("\nFACTORA ENVIRONMENT CHECK")
     check_python()
     check_ram()
     check_ollama()

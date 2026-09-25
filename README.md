@@ -1,4 +1,4 @@
-#  Claim-Level Misinformation Verification
+# FACTORA — Claim-Level Misinformation Verification
 
 **Hackathon:** Technical Hackathon, 4-Hour Event · **Domain:** AI / ML
 **Problem statement:** AI-03 — AI-Powered Fake News Detection
@@ -9,11 +9,11 @@
 ## What it does
 
 Most systems ask *"does this text look fake?"* That question has no good
-answer. SATYA asks a different one: *"what exactly is this text claiming, and
+answer. FACTORA asks a different one: *"what exactly is this text claiming, and
 has anyone already checked it?"* — and that question has an answer that comes
 with a URL.
 
-Given a WhatsApp forward, a claim, or a news article, SATYA:
+Given a WhatsApp forward, a claim, or a news article, FACTORA:
 
 1. detects romanised Tamil/Hindi and converts it to native script **before**
    language ID, then produces an English pivot;
@@ -88,7 +88,7 @@ approach is unambiguous:
   text was machine-generated while performing near chance on whether it is
   *true*.
 
-So SATYA trains nothing. Retrieval-based verification does not have that
+So FACTORA trains nothing. Retrieval-based verification does not have that
 failure mode, because there is no decision boundary over topics to overfit.
 
 ---

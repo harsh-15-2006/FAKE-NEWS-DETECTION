@@ -1,4 +1,4 @@
-# SATYA — dependencies
+# FACTORA — dependencies
 # Deliberately NO torch / transformers / sentence-transformers / spaCy.
 # Reason: those are multi-GB downloads. Every capability below is either
 # pure-Python or delegated to the locally-installed Ollama server.

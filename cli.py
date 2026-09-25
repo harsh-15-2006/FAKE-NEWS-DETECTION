@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-SATYA — command-line entry point.
+FACTORA — command-line entry point.
 
 Every threshold, weight and toggle is a flag with a sensible default from
 config/settings.yaml. Nothing behavioural is hardcoded in src/.
@@ -34,7 +34,7 @@ BADGE = {
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
-        prog="satya",
+        prog="factora",
         description="Claim-level misinformation verification (Tamil/Hindi/English).",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
@@ -212,7 +212,7 @@ def main(argv: list[str] | None = None) -> int:
     # ---- human-readable ------------------------------------------------ #
     L = report.language
     print("\n" + "=" * 70)
-    print("SATYA REPORT")
+    print("FACTORA REPORT")
     print("=" * 70)
     print(f"language      : {L.lang_code}  (romanised={L.was_romanized})")
     print(f"transliteration: {L.translit_method}")

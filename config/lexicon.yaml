@@ -1,4 +1,4 @@
-# SATYA — manipulation-signal lexicon, Tamil / Hindi / English.
+# FACTORA — manipulation-signal lexicon, Tamil / Hindi / English.
 #
 # IMPORTANT: this produces the RULE SCORE, which contributes only 0.10 of the
 # final fusion weight. It is a prior that breaks ties. It can never by itself

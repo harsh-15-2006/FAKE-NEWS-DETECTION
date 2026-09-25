@@ -1,4 +1,4 @@
-# SATYA — category routing policy.
+# FACTORA — category routing policy.
 #
 # Category decides four things at once: which retrieval strategy runs, which source
 # set it runs against, how strict the thresholds are, and whether an automated

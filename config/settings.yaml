@@ -1,4 +1,4 @@
-# SATYA — default settings.
+# FACTORA — default settings.
 # Every value here is overridable from the CLI. Nothing is hardcoded in src/.
 
 languages:

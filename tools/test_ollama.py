@@ -124,7 +124,7 @@ def main() -> int:
     results["ctx"] = ok
     details.append(detail)
 
-    # 4 - a realistic SATYA-sized stance prompt
+    # 4 - a realistic FACTORA-sized stance prompt
     passages = "\n\n".join(
         f"[PASSAGE {i}] (publisher: Example{i}; rating: False)\n"
         f"Claim reviewed: A sample claim number {i} about a public event. "
@@ -188,7 +188,7 @@ def main() -> int:
         print("real message from llama-server. Run the demo with --no-llm in")
         print("the meantime; the pipeline is fully functional without it.")
     elif not results["json"]:
-        print("Plain chat works but format=json fails. Run SATYA with")
+        print("Plain chat works but format=json fails. Run FACTORA with")
         print("  --llm-json-mode off   (not yet a flag — tell Claude)")
     elif not results["ctx"]:
         print(f"json works but num_ctx={args.ctx} fails. Retry with a smaller")
