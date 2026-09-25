@@ -1,0 +1,93 @@
+{
+  "_README": "SYNTHETIC SAMPLE CORPUS - NOT REAL FACT-CHECKS. Every record here is invented, uses a placeholder publisher name and an example.invalid URL, and is flagged with _synthetic:true. Its only purpose is to let the pipeline run and be demonstrated with no network. Passages from this file are labelled [SYNTHETIC SAMPLE] in the CLI and trigger a red warning banner in the dashboard, and retrieval_strength is halved for them. Real evidence comes from cache/claimreview.json, which tools/build_cache.py populates from the live Google Fact Check Tools API once an API key exists.",
+  "records": [
+    {
+      "_synthetic": true,
+      "text": "A doctor has said this medicine will bring sugar levels back to normal in 3 days.",
+      "publisher": "SAMPLE-FactChecker-A",
+      "url": "https://example.invalid/sample/health-001",
+      "textualRating": "False",
+      "title": "No medicine normalises blood sugar in three days",
+      "claimDate": "2023-04-11",
+      "reviewDate": "2023-04-18",
+      "languageCode": "en"
+    },
+    {
+      "_synthetic": true,
+      "text": "இந்த மருந்து சாப்பிட்டால் சர்க்கரை அளவு மூன்று நாளில் சரியாகிவிடும் என்று மருத்துவர் கூறுகிறார்.",
+      "publisher": "SAMPLE-FactChecker-B",
+      "url": "https://example.invalid/sample/health-002-ta",
+      "textualRating": "False",
+      "title": "மூன்று நாளில் சர்க்கரை அளவை சரிசெய்யும் மருந்து எதுவும் இல்லை",
+      "claimDate": "2023-04-10",
+      "reviewDate": "2023-04-20",
+      "languageCode": "ta"
+    },
+    {
+      "_synthetic": true,
+      "text": "The government has announced that every citizen will receive 50000 rupees under a new scheme.",
+      "publisher": "SAMPLE-FactChecker-A",
+      "url": "https://example.invalid/sample/political-001",
+      "textualRating": "False",
+      "title": "No such cash transfer scheme has been announced",
+      "claimDate": "2019-08-02",
+      "reviewDate": "2024-01-15",
+      "languageCode": "en"
+    },
+    {
+      "_synthetic": true,
+      "text": "सरकार ने घोषणा की है कि हर नागरिक को नई योजना के तहत 50000 रुपये मिलेंगे।",
+      "publisher": "SAMPLE-FactChecker-C",
+      "url": "https://example.invalid/sample/political-002-hi",
+      "textualRating": "False",
+      "title": "ऐसी कोई योजना घोषित नहीं की गई है",
+      "claimDate": "2019-08-05",
+      "reviewDate": "2024-02-01",
+      "languageCode": "hi"
+    },
+    {
+      "_synthetic": true,
+      "text": "A photograph showing a crowd at a rally was taken at last week's event.",
+      "publisher": "SAMPLE-FactChecker-B",
+      "url": "https://example.invalid/sample/political-003",
+      "textualRating": "Miscaptioned",
+      "title": "The photograph is from an unrelated event several years earlier",
+      "claimDate": "2018-11-20",
+      "reviewDate": "2025-03-09",
+      "languageCode": "en"
+    },
+    {
+      "_synthetic": true,
+      "text": "Drinking hot water with lemon every morning prevents all viral infections.",
+      "publisher": "SAMPLE-FactChecker-C",
+      "url": "https://example.invalid/sample/health-003",
+      "textualRating": "False",
+      "title": "There is no evidence that lemon water prevents viral infection",
+      "claimDate": "2020-03-14",
+      "reviewDate": "2020-03-21",
+      "languageCode": "en"
+    },
+    {
+      "_synthetic": true,
+      "text": "A well known actor has announced retirement from cinema this month.",
+      "publisher": "SAMPLE-FactChecker-A",
+      "url": "https://example.invalid/sample/entertainment-001",
+      "textualRating": "False",
+      "title": "No retirement announcement was made; the quote is fabricated",
+      "claimDate": "2024-06-01",
+      "reviewDate": "2024-06-04",
+      "languageCode": "en"
+    },
+    {
+      "_synthetic": true,
+      "text": "A new study proves that a common spice cures cancer completely.",
+      "publisher": "SAMPLE-FactChecker-B",
+      "url": "https://example.invalid/sample/health-004",
+      "textualRating": "False",
+      "title": "The study does not show a cure; findings were laboratory-stage only",
+      "claimDate": "2017-09-12",
+      "reviewDate": "2024-11-02",
+      "languageCode": "en"
+    }
+  ]
+}

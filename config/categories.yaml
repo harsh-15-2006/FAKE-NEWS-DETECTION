@@ -1,0 +1,135 @@
+# SATYA — category routing policy.
+#
+# Category decides four things at once: which retrieval strategy runs, which source
+# set it runs against, how strict the thresholds are, and whether an automated
+# verdict is permitted at all.
+#
+# Grounding for the taxonomy (see README Sources):
+#   ISB Institute of Data Science: politics 46%, general 33.6%, religion 16.8%.
+#   Second study: health 27.2%, religion 25.1%, political 24.3%; online media
+#   health 29%, religion 25.1%, entertainment lowest at 3.8%.
+# The two disagree on weights, which is exactly why this is a config file and
+# not a hardcoded prior.
+
+defaults:
+  strategy: hybrid
+  harm_weight: 0.50
+  stance_threshold: 0.70
+  evidence_min_sources: 2
+  auto_verdict: true
+  retrieval_budget: medium
+  use_llm: true
+
+categories:
+
+  political:
+    keywords_en: [government, minister, election, party, vote, parliament,
+                  policy, bjp, congress, mp, mla, cm, pm, bill, act, scheme]
+    keywords_ta: [அரசு, அமைச்சர், தேர்தல், கட்சி, வாக்கு, நாடாளுமன்றம், திட்டம்]
+    keywords_hi: [सरकार, मंत्री, चुनाव, पार्टी, वोट, संसद, नीति, योजना]
+    keywords_romanized: [sarkar, mantri, chunav, thernthedu, arasu, katchi]
+    strategy: hybrid
+    harm_weight: 0.80
+    stance_threshold: 0.70
+    evidence_min_sources: 2
+    auto_verdict: true
+    retrieval_budget: high
+    use_llm: true
+
+  health:
+    keywords_en: [medicine, cure, vaccine, doctor, hospital, disease, cancer,
+                  diabetes, covid, treatment, tablet, drug, remedy, symptom,
+                  sugar, blood pressure, immunity]
+    keywords_ta: [மருந்து, மருத்துவர், நோய், தடுப்பூசி, சிகிச்சை, சர்க்கரை, புற்றுநோய்]
+    keywords_hi: [दवा, डॉक्टर, बीमारी, टीका, इलाज, कैंसर, शुगर, अस्पताल]
+    keywords_romanized: [marundhu, maruthuvar, dawa, doctor, ilaj, bimari, sugar]
+    strategy: hybrid
+    harm_weight: 0.95           # highest individual harm
+    stance_threshold: 0.72      # stricter than default
+    evidence_min_sources: 2
+    auto_verdict: true
+    retrieval_budget: high
+    use_llm: true
+
+  religious:
+    keywords_en: [temple, mosque, church, hindu, muslim, christian, religion,
+                  communal, god, prayer, festival, caste]
+    keywords_ta: [கோயில், மசூதி, சர்ச், இந்து, முஸ்லிம், கிறிஸ்தவர், மதம், சாதி]
+    keywords_hi: [मंदिर, मस्जिद, चर्च, हिंदू, मुस्लिम, ईसाई, धर्म, जाति]
+    keywords_romanized: [mandir, masjid, kovil, hindu, muslim, dharm, madham]
+    strategy: hybrid
+    harm_weight: 1.00           # highest social harm
+    stance_threshold: 0.90
+    evidence_min_sources: 3
+    auto_verdict: false         # HARD GATE - always escalate to a human
+    retrieval_budget: high
+    use_llm: true
+
+  crime:
+    keywords_en: [police, arrest, murder, theft, kidnap, attack, fir, court,
+                  accused, crime, assault]
+    keywords_ta: [காவல்துறை, கைது, கொலை, திருட்டு, கடத்தல், தாக்குதல், நீதிமன்றம்]
+    keywords_hi: [पुलिस, गिरफ्तार, हत्या, चोरी, अपहरण, हमला, अदालत]
+    keywords_romanized: [police, kaithu, kolai, giraftar, hatya, chori]
+    strategy: hybrid
+    harm_weight: 0.85
+    stance_threshold: 0.72
+    evidence_min_sources: 2
+    auto_verdict: true
+    retrieval_budget: high
+    use_llm: true
+
+  sports:
+    keywords_en: [match, cricket, football, score, wicket, goal, tournament,
+                  ipl, world cup, team, player, innings, runs]
+    keywords_ta: [போட்டி, கிரிக்கெட், கால்பந்து, ஸ்கோர், அணி, வீரர், ரன்]
+    keywords_hi: [मैच, क्रिकेट, फुटबॉल, स्कोर, टीम, खिलाड़ी, रन, विकेट]
+    keywords_romanized: [match, cricket, score, potti, aani, team]
+    strategy: keyword           # results are lexical, not semantic
+    harm_weight: 0.10
+    stance_threshold: 0.60
+    evidence_min_sources: 1
+    auto_verdict: true
+    retrieval_budget: low
+    use_llm: false              # deterministic lookup; no model in the loop
+
+  entertainment:
+    keywords_en: [actor, actress, film, movie, cinema, song, director, album,
+                  celebrity, star, release, box office]
+    keywords_ta: [நடிகர், நடிகை, படம், சினிமா, பாடல், இயக்குனர், வெளியீடு]
+    keywords_hi: [अभिनेता, अभिनेत्री, फिल्म, सिनेमा, गाना, निर्देशक]
+    keywords_romanized: [nadigar, padam, cinema, film, hero, heroine]
+    strategy: keyword
+    harm_weight: 0.15
+    stance_threshold: 0.60
+    evidence_min_sources: 1
+    auto_verdict: true
+    retrieval_budget: low
+    use_llm: true
+
+  finance:
+    keywords_en: [bank, upi, loan, investment, scheme, money, rupees, account,
+                  kyc, refund, lottery, prize, crypto, otp]
+    keywords_ta: [வங்கி, கடன், முதலீடு, பணம், ரூபாய், கணக்கு, பரிசு]
+    keywords_hi: [बैंक, कर्ज, निवेश, पैसा, रुपये, खाता, इनाम, लॉटरी]
+    keywords_romanized: [bank, kadan, paisa, panam, rupees, lottery, inaam]
+    strategy: hybrid
+    harm_weight: 0.85
+    stance_threshold: 0.70
+    evidence_min_sources: 2
+    auto_verdict: true
+    retrieval_budget: medium
+    use_llm: true
+
+  general:
+    keywords_en: []
+    keywords_ta: []
+    keywords_hi: []
+    keywords_romanized: []
+    strategy: hybrid
+    harm_weight: 0.40
+    stance_threshold: 0.70
+    evidence_min_sources: 2
+    auto_verdict: true
+    retrieval_budget: medium
+    use_llm: true

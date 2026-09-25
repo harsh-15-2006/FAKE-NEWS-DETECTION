@@ -1,0 +1,116 @@
+# SATYA — manipulation-signal lexicon, Tamil / Hindi / English.
+#
+# IMPORTANT: this produces the RULE SCORE, which contributes only 0.10 of the
+# final fusion weight. It is a prior that breaks ties. It can never by itself
+# produce a REFUTED verdict — see src/score.py gate order.
+#
+# Three variants per concept:
+#   native    - the language's own script
+#   romanized - Latin-script typing, which is how people actually forward
+#   english   - English surface forms
+#
+# The romanized lists matter most. A Tamil forward typed in Latin script scores
+# 0.0 against an English-only dictionary - not because it is clean, but because
+# the dictionary cannot see it.
+#
+# NOTE FOR THE TEAM: have a native Tamil and Hindi speaker sanity-check the
+# phrasing below before the demo. The structure is right; the idiom deserves a
+# human pass.
+
+concepts:
+
+  urgency:
+    weight: 0.10
+    english: ["urgent", "immediately", "right now", "hurry", "act fast",
+              "before it is too late", "last chance"]
+    native_ta: ["அவசரம்", "உடனே", "இப்போதே", "சீக்கிரம்"]
+    native_hi: ["तुरंत", "जल्दी", "अभी", "फौरन"]
+    romanized: ["avasaram", "udane", "ippothe", "seekiram",
+                "turant", "jaldi", "abhi", "fauran"]
+
+  share_pressure:
+    weight: 0.12
+    english: ["must share", "share now", "forward this", "send to everyone",
+              "share with 10 people", "do not ignore", "spread this"]
+    native_ta: ["கட்டாயம் பகிருங்கள்", "எல்லாருக்கும் அனுப்புங்க", "பகிரவும்"]
+    native_hi: ["सबको भेजें", "जरूर शेयर करें", "आगे भेजें", "शेयर करो"]
+    romanized: ["kandippa share pannunga", "ellarukkum anuppunga",
+                "share pannunga", "sabko bhejo", "zaroor share karein",
+                "aage bhejo", "forward pannunga"]
+
+  sensational:
+    weight: 0.10
+    english: ["shocking", "unbelievable", "breaking", "exposed", "you won't believe",
+              "stunning", "horrifying", "viral"]
+    native_ta: ["அதிர்ச்சி", "நம்ப முடியாத", "பகீர்", "வைரல்"]
+    native_hi: ["चौंकाने वाला", "हैरान", "सनसनीखेज", "वायरल"]
+    romanized: ["athirchi", "nampa mudiyaadha", "bakeer",
+                "chaunkane wala", "hairan", "sansanikhez"]
+
+  unverifiable_authority:
+    weight: 0.14
+    english: ["doctors say", "a doctor said", "scientists confirm", "experts say",
+              "research shows", "studies prove", "government has announced",
+              "sources say", "it is confirmed"]
+    native_ta: ["மருத்துவர் சொல்கிறார்", "விஞ்ஞானிகள் கூறுகின்றனர்",
+                "ஆய்வு தெரிவிக்கிறது", "அரசு அறிவித்துள்ளது"]
+    native_hi: ["डॉक्टर कहते हैं", "वैज्ञानिकों ने पुष्टि की",
+                "शोध बताता है", "सरकार ने घोषणा की"]
+    romanized: ["doctor sollirukaaru", "doctor solraaru", "vingnanigal",
+                "doctor kehte hain", "vaigyanikon ne", "sarkar ne ghoshna"]
+
+  miracle_claim:
+    weight: 0.14
+    english: ["guaranteed", "100% cure", "permanent cure", "no side effects",
+              "cures cancer", "in 3 days", "instant relief", "miracle"]
+    native_ta: ["உத்தரவாதம்", "முழு குணம்", "பக்க விளைவுகள் இல்லை", "அதிசயம்"]
+    native_hi: ["गारंटी", "पूरा इलाज", "कोई साइड इफेक्ट नहीं", "चमत्कार"]
+    romanized: ["guarantee", "utharavaadham", "muzhu kunam", "poora ilaj",
+                "chamatkar", "adhisayam"]
+
+  financial_lure:
+    weight: 0.12
+    english: ["free money", "you have won", "claim your prize", "lottery",
+              "click here to receive", "limited offer", "cash reward",
+              "government is giving"]
+    native_ta: ["இலவசம்", "பரிசு வென்றீர்கள்", "பணம் பெறுங்கள்", "அரசு தருகிறது"]
+    native_hi: ["मुफ्त", "आपने जीता", "इनाम पाएं", "सरकार दे रही है"]
+    romanized: ["ilavasam", "parisu", "muft", "inaam", "sarkar de rahi hai",
+                "paisa milega", "panam kidaikkum"]
+
+  secrecy:
+    weight: 0.08
+    english: ["they don't want you to know", "media is hiding", "secret",
+              "suppressed", "banned information", "hidden truth"]
+    native_ta: ["ரகசியம்", "மறைக்கப்பட்ட", "ஊடகங்கள் மறைக்கின்றன"]
+    native_hi: ["गुप्त", "छिपाया गया", "मीडिया छुपा रहा है"]
+    romanized: ["ragasiyam", "maraikkappatta", "gupt", "chhupaya",
+                "media chhupa raha"]
+
+  call_to_action:
+    weight: 0.06
+    english: ["click here", "click this link", "download now", "register now",
+              "verify your account", "update kyc"]
+    native_ta: ["இங்கே கிளிக் செய்யவும்", "பதிவு செய்யுங்கள்"]
+    native_hi: ["यहां क्लिक करें", "अभी रजिस्टर करें", "केवाईसी अपडेट करें"]
+    romanized: ["click pannunga", "yahan click karein", "kyc update karein"]
+
+# Language-invariant structural signals. These work on any script and are
+# harder to game than a wordlist.
+structural:
+  caps_ratio:
+    weight: 0.08
+    threshold: 0.30             # >30% of alphabetic chars uppercase
+  exclamation_run:
+    weight: 0.06
+    threshold: 2                # "!!" or more, anywhere
+  emoji_density:
+    weight: 0.05
+    threshold: 0.04             # emoji chars / total chars
+  forwarded_marker:
+    weight: 0.07
+    patterns: ["forwarded many times", "forwarded", "fwd:", "fw:",
+               "copy paste", "copied message"]
+  unattributed_number:
+    weight: 0.09               # a big number with no named source nearby
+    min_digits: 3

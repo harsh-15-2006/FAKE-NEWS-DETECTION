@@ -1,0 +1,17 @@
+# SATYA — dependencies
+# Deliberately NO torch / transformers / sentence-transformers / spaCy.
+# Reason: those are multi-GB downloads. Every capability below is either
+# pure-Python or delegated to the locally-installed Ollama server.
+
+# --- CORE (install these first; CLI works with only these) ---
+requests>=2.31.0
+PyYAML>=6.0
+rank-bm25>=0.2.2
+
+# --- Romanised -> native script transliteration (pure Python, small) ---
+indic-transliteration>=2.3.0
+
+# --- DASHBOARD (larger: pulls pandas/numpy/pyarrow) ---
+# If this is slow on venue wifi, Ctrl+C and run the core four above.
+# The CLI is fully functional without Streamlit.
+streamlit>=1.30.0

@@ -1,0 +1,68 @@
+# SATYA — default settings.
+# Every value here is overridable from the CLI. Nothing is hardcoded in src/.
+
+languages:
+  supported: [ta, hi, en]
+  pivot: en
+  transliterate_romanized: true
+  translit_backend: auto        # auto | rule | llm | off
+                                # auto = LLM if reachable, else rule-based
+
+claims:
+  min_sentence_chars: 20
+  max_claims_per_doc: 12
+  checkworthy_threshold: 0.45
+  weights:                      # contributions to the check-worthiness score
+    has_number: 0.25
+    has_date: 0.15
+    has_proper_noun: 0.25
+    has_assertive_verb: 0.20
+    adequate_length: 0.15
+  penalties:
+    is_question: 0.50           # subtracted
+    is_hedged: 0.25             # subtracted
+
+retrieval:
+  backend: hybrid               # api | offline | hybrid
+  dual_path: true               # search native language AND english pivot
+  api_endpoint: "https://factchecktools.googleapis.com/v1alpha1/claims:search"
+  api_page_size: 10
+  api_timeout_s: 12
+  prior_debunk_window_days: 3650
+  resurface_gap_days: 180
+  topk: 8
+  rrf_k: 60
+  offline_cache: "cache/claimreview.json"
+  sample_corpus: "cache/sample_corpus.json"
+  evidence_min_sources: 2
+
+llm:
+  enabled: true
+  base_url: "http://localhost:11434"
+  model: "llama3.2:latest"      # matches `ollama list` on this machine
+  fallback_model: null
+  timeout_s: 90
+  temperature: 0.1              # extraction, not creative generation
+  num_ctx: 4096
+  json_mode: true
+  max_claims: 5                 # cap LLM calls per document
+  only_when_ambiguous: true     # skip LLM when an exact prior debunk already decides it
+
+grounding:
+  enabled: true
+  strictness: normalized        # exact | normalized
+  min_span_chars: 12            # a quoted span shorter than this proves nothing
+
+scoring:
+  weights:
+    llm: 0.45
+    retrieval: 0.30
+    rule: 0.10
+    ml: 0.15
+  stance_threshold: 0.70
+  conflict_threshold: 0.40      # mixed support/contradict above this -> ESCALATE
+  never_auto_verdict: [religious, communal]
+
+output:
+  format: json                  # json | text
+  dir: "out"
