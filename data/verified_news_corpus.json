@@ -1,0 +1,134 @@
+[
+  {
+    "id": "FC-001",
+    "title": "RBI Clarification on Currency Notes with Writing",
+    "claim": "Currency notes with any pen writing or marks on them are completely invalid and rejected by banks.",
+    "verdict": "FALSE",
+    "explanation": "The Reserve Bank of India (RBI) under its Clean Note Policy has clarified that notes with writing are NOT invalid and remain legal tender. Banks cannot reject them. However, people are requested not to scribble to prolong note lifespan.",
+    "source": "Reserve Bank of India (RBI) & PIB Fact Check",
+    "language": "en",
+    "keywords": ["rbi", "currency note", "pen writing", "scribbling", "legal tender", "invalid note", "bank reject"],
+    "content": "Official RBI Advisory: The Reserve Bank of India refutes rumors claiming currency notes scribbled with pens or ink are declared invalid. Any currency note with writing or marks remains valid legal tender and acceptable at all commercial banks. Under RBI's Clean Note Policy, citizens are merely discouraged from writing on currency to avoid premature soiling. Notes are not rejected."
+  },
+  {
+    "id": "FC-002",
+    "title": "UNESCO Did Not Declare Indian National Anthem Best in the World",
+    "claim": "UNESCO has officially declared Jana Gana Mana as the best national anthem in the world.",
+    "verdict": "FALSE",
+    "explanation": "UNESCO has repeatedly confirmed that it never conducts competitions or gives awards for the 'best national anthem'. This is a viral recurring WhatsApp chain rumor circulating since 2008.",
+    "source": "UNESCO Official Spokesperson & Factly",
+    "language": "en",
+    "keywords": ["unesco", "national anthem", "jana gana mana", "best anthem", "award", "whatsapp forward"],
+    "content": "Fact Check: The United Nations Educational, Scientific and Cultural Organization (UNESCO) has explicitly stated that it does not confer ratings or declarations of best national anthem for any country. The claim that Jana Gana Mana was voted or awarded 'Best National Anthem in the World' is completely false and baseless."
+  },
+  {
+    "id": "FC-003",
+    "title": "Free Solar Rooftop Scheme by Government of India",
+    "claim": "PM Surya Ghar scheme gives 100% completely free solar panels without any registration fee or application process through third-party WhatsApp links.",
+    "verdict": "MISLEADING",
+    "explanation": "Under PM Surya Ghar: Muft Bijli Yojana, subsidies up to 60-78% are provided directly via DBT through the official portal pmsuryaghar.gov.in. WhatsApp links asking for OTPs or promising totally free instant installation without verification are fraudulent phishing scams.",
+    "source": "Ministry of New and Renewable Energy (MNRE)",
+    "language": "en",
+    "keywords": ["pm surya ghar", "free solar", "whatsapp link", "solar panel subsidy", "muft bijli", "scam link"],
+    "content": "MNRE Fact Check: Citizens must apply for PM Surya Ghar: Muft Bijli Yojana solely on the government portal pmsuryaghar.gov.in. Subsidies are disbursed directly to bank accounts after installation by empanelled vendors. Beware of fake WhatsApp messages and APK apps promising 100% free rooftop solar panels."
+  },
+  {
+    "id": "FC-004",
+    "title": "5G Mobile Towers Do Not Spread Viruses or Radiation Illness",
+    "claim": "5G network radiation is directly responsible for spreading airborne viral diseases and killing birds.",
+    "verdict": "FALSE",
+    "explanation": "World Health Organization (WHO) and Telecom Regulatory Authority confirm radio frequency radiation from 5G towers is non-ionizing and cannot transmit viruses or biological bacteria. Radiation levels in India are strictly regulated at 1/10th of international safety standards.",
+    "source": "World Health Organization (WHO) & Department of Telecommunications (DoT)",
+    "language": "en",
+    "keywords": ["5g radiation", "virus transmission", "birds dying", "cell tower", "who", "telecom"],
+    "content": "Scientific Clarification: 5G mobile networks utilize non-ionizing radio frequency radiation which lacks the photon energy to alter cellular DNA or carry biological pathogens. WHO and scientific consensus confirm that wireless frequencies cannot create or propagate viral infections. Mass bird death claims have been debunked as fabricated social media myths."
+  },
+  {
+    "id": "FC-005",
+    "title": "Drinking Boiled Garlic Water Does Not Cure COVID-19 or Serious Cancer",
+    "claim": "Drinking concentrated boiled garlic water with ginger is a guaranteed 100% miracle cure that eliminates cancer and coronavirus within 24 hours.",
+    "verdict": "FALSE",
+    "explanation": "While garlic possesses natural antimicrobial properties, there is zero clinical or medical evidence from WHO or ICMR that consuming garlic cures viral infections or eliminates cancerous tumors.",
+    "source": "World Health Organization (WHO) & ICMR",
+    "language": "en",
+    "keywords": ["garlic water", "miracle cure", "cancer cure", "covid remedy", "who advisory", "icmr"],
+    "content": "WHO Health Advisory: Garlic is a healthy food that may contain antimicrobial properties. However, there is no scientific or clinical evidence that consuming boiled garlic water or herbal concoctions cures cancer or respiratory viral infections. Do not abandon approved evidence-based medical treatment in favor of unverified home remedies."
+  },
+  {
+    "id": "FC-006",
+    "title": "Tamil Nadu Pongal Gift Hamper Cash Distribution Myth (தமிழ்)",
+    "claim": "தமிழக அரசு அனைத்து குடும்ப அட்டைதாரர்களுக்கும் பொங்கல் பரிசாக ரூபாய் 5000 ரொக்கம் உடனே வழங்க உத்தரவிட்டுள்ளது.",
+    "verdict": "FALSE",
+    "explanation": "தமிழக அரசு பொங்கல் பரிசு தொகுப்பாக 1 கிலோ பச்சரிசி, 1 கிலோ சர்க்கரை மற்றும் முழு கரும்பு வழங்குவதாக மட்டுமே அதிகாரப்பூர்வமாக அறிவித்துள்ளது. ரூ. 5000 ரொக்கம் தருவதாக பரவும் செய்தி போலியானது என தமிழ்நாடு தகவல் சரிபார்ப்பகம் (TN Fact Check Unit) தெளிவுபடுத்தியுள்ளது.",
+    "source": "தமிழ்நாடு உண்மை சரிபார்ப்புக் குழு (TN Fact Check Unit)",
+    "language": "ta",
+    "keywords": ["பொங்கல் பரிசு", "ரூபாய் 5000", "குடும்ப அட்டை", "ரேஷன் அட்டை", "தமிழக அரசு", "போலி செய்தி"],
+    "content": "தமிழ்நாடு தகவல் சரிபார்ப்பக செய்தி வெளியீடு: தமிழக அரசு அனைத்து ரேஷன் அட்டைதாரர்களுக்கும் ரூ. 5000 ரொக்கப்பரிசு வழங்க உத்தரவிட்டுள்ளதாக வாட்ஸ்அப் மற்றும் முகநூலில் பரவும் தகவல் முற்றிலும் பொய்யானது. அதிகாரப்பூர்வமாக அரசு அறிவித்த பரிசுப் பொருட்கள் மற்றும் வழிகாட்டுதல்கள் மட்டுமே உண்மை. வதந்திகளை நம்பவோ பகிரவோ வேண்டாம்."
+  },
+  {
+    "id": "FC-007",
+    "title": "TNEB EB Bill Fake Disconnection SMS Scam (தமிழ்)",
+    "claim": "உங்கள் மின் கட்டணம் செலுத்தப்படாததால் இன்று இரவு 9.30 மணிக்கு உங்கள் மின் இணைப்பு துண்டிக்கப்படும். கொடுக்கப்பட்ட எண்ணை உடனே தொடர்பு கொள்ளவும்.",
+    "verdict": "SCAM",
+    "explanation": "இது பரவலாக நடக்கும் ஆன்லைன் நிதி மோசடி (Phishing Scam). மின்சார வாரியம் (TNEB/TANGEDCO) தனிப்பட்ட மொபைல் எண்களில் இருந்தோ அல்லது வாட்ஸ்அப் வழியாகவோ துண்டிப்பு எச்சரிக்கை அனுப்பாது. அதிகாரப்பூர்வ குறும்பணிகள் மட்டுமே அனுப்பப்படும்.",
+    "source": "TANGEDCO & Cyber Crime Wing Tamil Nadu",
+    "language": "ta",
+    "keywords": ["tneb", "மின் இணைப்பு", "மின் கட்டணம்", "இன்று இரவு துண்டிக்கப்படும்", "மோசடி", "சைபர் கிரைம்"],
+    "content": "தமிழ்நாடு மின் பகிர்மான கழகம் எச்சரிக்கை: மின் இணைப்பு துண்டிக்கப்படும் என தனி நபர் செல்போன் எண்களில் இருந்து வரும் எச்சரிக்கை குறுஞ்செய்திகள் சைபர் குற்றவாளிகளின் மோசடி வலை ஆகும். மின்வாரியம் அத்தகைய செய்திகளை அனுப்பாது. இணைப்புகளை கிளிக் செய்யவோ, அதில் குறிப்பிடப்பட்டுள்ள எண்களுக்கு அழைக்கவோ வேண்டாம்."
+  },
+  {
+    "id": "FC-008",
+    "title": "NASA Solar Storm 3-Day Global Internet Blackout Rumor",
+    "claim": "NASA warns that an upcoming massive solar superstorm will permanently disable global internet, electricity, and telecommunications for months next week.",
+    "verdict": "MISLEADING",
+    "explanation": "While space weather and coronal mass ejections (CMEs) are routinely monitored by NASA and NOAA, there is no warning or forecast of an internet apocalypse or multi-month collapse. Sensational clickbait outlets regularly recycle routine solar flare alerts into apocalyptic doom stories.",
+    "source": "NASA Space Weather & NOAA",
+    "language": "en",
+    "keywords": ["nasa", "solar storm", "internet apocalypse", "solar flare", "blackout", "noaa"],
+    "content": "NASA Space Science Advisory: Reports claiming NASA has predicted an imminent catastrophic internet apocalypse or global communication collapse are unfounded sensationalism. Solar cycles produce routine geomagnetic activity monitored by NOAA's Space Weather Prediction Center, with standard mitigation protocols in place."
+  },
+  {
+    "id": "FC-009",
+    "title": "Free Government Laptop Scheme WhatsApp Link (Tanglish)",
+    "claim": "Govt student free laptop scheme link click panni 10 friends ku share pannina free laptop kedaikum.",
+    "verdict": "SCAM",
+    "explanation": "Government laptop schemes are executed strictly via official schools and colleges through verified institutional portals. Government never distributes laptops via WhatsApp forwarding chains or third-party blog links asking for personal details.",
+    "source": "PIB Fact Check & Cyber Cell",
+    "language": "tanglish",
+    "keywords": ["free laptop", "govt scheme", "whatsapp share", "10 friends", "link click", "tanglish scam"],
+    "content": "Tanglish Fact Check: WhatsApp la 'Students free laptop kedaika indha link click panni 10 friends ku forward pannunga' nu vara messages ellam fake phishing scams. Arasu thittam endha oru social media link valiyagavum laptop tharaadhu. Bank details or OTP tharave vendaam."
+  },
+  {
+    "id": "FC-010",
+    "title": "Papaya Leaf Juice Is Not an Approved Substitute for Platelet Transfusion in Dengue",
+    "claim": "Papaya leaf extract completely cures dengue virus and eliminates all need for hospitalization or medical care.",
+    "verdict": "MISLEADING",
+    "explanation": "While studies suggest papaya leaf extracts might support minor platelet recovery, severe dengue involves vascular leakage, plasma loss, and hemorrhagic shock requiring hospital fluid therapy and close monitoring. It is NOT a substitute for critical medical care.",
+    "source": "Indian Council of Medical Research (ICMR) & Ministry of Health",
+    "language": "en",
+    "keywords": ["papaya leaf", "dengue cure", "platelet count", "icmr", "hospitalization", "home remedy"],
+    "content": "Health Advisory: Dengue fever is caused by a virus that requires careful clinical management, fluid balance monitoring, and professional care. Relying solely on herbal remedies like papaya leaf juice without medical supervision during severe dengue can result in fatal complications."
+  },
+  {
+    "id": "FC-011",
+    "title": "ISRO Chandrayaan Water Discovery Confirmation (தமிழ் & English)",
+    "claim": "ISRO's Pragyan rover confirmed the presence of Sulfur and hydroxyl molecules on the lunar south polar surface.",
+    "verdict": "TRUE",
+    "explanation": "ISRO officially confirmed through LIBS (Laser-Induced Breakdown Spectroscopy) and APXS payloads that Sulfur (S), Iron (Fe), Titanium (Ti), and other elements were unambiguously detected near the lunar south pole.",
+    "source": "ISRO Official Press Release",
+    "language": "en",
+    "keywords": ["isro", "chandrayaan", "pragyan", "lunar south pole", "sulfur discovery", "true news"],
+    "content": "ISRO Official Statement: The Laser-Induced Breakdown Spectroscopy (LIBS) instrument onboard the Chandrayaan Pragyan Rover has unambiguously confirmed the presence of Sulfur (S) in the lunar surface near the south pole, alongside Aluminium, Calcium, Iron, Chromium, Titanium, Manganese, and Oxygen."
+  },
+  {
+    "id": "FC-012",
+    "title": "Tamil Nadu Kalaignar Magalir Urimai Thogai Eligibility (தமிழ்)",
+    "claim": "கலைஞர் மகளிர் உரிமைத் தொகை திட்டம் நிறுத்தப்பட உள்ளதாகவும், புதிய பயனாளிகள் அனைவரும் நீக்கப்படுவதாகவும் தகவல்.",
+    "verdict": "FALSE",
+    "explanation": "கலைஞர் மகளிர் உரிமைத் திட்டம் தொடர்ந்து செயல்பட்டு வருகிறது. மாதந்தோறும் தகுதியுள்ள 1.15 கோடிக்கும் அதிகமான பெண்களுக்கு ரூ. 1000 வங்கி கணக்கில் வரவு வைக்கப்படுகிறது. திட்டம் நிறுத்தப்படும் என்ற தகவல் முற்றிலும் தவறானது.",
+    "source": "தமிழ்நாடு அரசு சமூக நலத்துறை",
+    "language": "ta",
+    "keywords": ["மகளிர் உரிமைத் தொகை", "ரூபாய் 1000", "திட்டம் நிறுத்தம்", "வதந்தி", "தமிழ்நாடு அரசு", "தவறான தகவல்"],
+    "content": "அரசு செய்திக்குறிப்பு: மகளிர் உரிமைத் திட்டம் நிறுத்தப்பட உள்ளதாக சமூக வலைதளங்களில் பரப்பப்படும் விஷமத்தனமான தகவல்கள் முற்றிலும் ஆதாரமற்றவை. தகுதியுள்ள அனைத்து மகளிருக்கும் மாதம்தோறும் தவறாமல் ரூ.1000 அவரவர் வங்கிக் கணக்கிற்கு நேரடியாக செலுத்தப்பட்டு வருகிறது."
+  }
+]
