@@ -80,6 +80,10 @@ def build_parser() -> argparse.ArgumentParser:
     llm.add_argument("--llm-base-url", default=None)
     llm.add_argument("--llm-temperature", type=float, default=None)
     llm.add_argument("--llm-ctx", type=int, default=None)
+    llm.add_argument("--llm-num-gpu", type=int, default=None,
+                     help="GPU layers; 0 = CPU only (default). Use 0 if Ollama "
+                          "crashes with 'CUDA error: device kernel image is "
+                          "invalid'")
     llm.add_argument("--llm-timeout", type=float, default=None)
     llm.add_argument("--llm-max-claims", type=int, default=None)
     llm.add_argument("--llm-only-when-ambiguous", choices=["true", "false"],
@@ -159,6 +163,7 @@ def main(argv: list[str] | None = None) -> int:
         "llm.base_url": args.llm_base_url,
         "llm.temperature": args.llm_temperature,
         "llm.num_ctx": args.llm_ctx,
+        "llm.num_gpu": args.llm_num_gpu,
         "llm.timeout_s": args.llm_timeout,
         "llm.max_claims": args.llm_max_claims,
         "llm.only_when_ambiguous": _b(args.llm_only_when_ambiguous),

@@ -63,6 +63,8 @@ class OllamaClient:
         self.timeout = float(lcfg.get("timeout_s", 90))
         self.temperature = float(lcfg.get("temperature", 0.1))
         self.num_ctx = int(lcfg.get("num_ctx", 4096))
+        # 0 = CPU only. See config/settings.yaml for why this defaults to 0.
+        self.num_gpu = lcfg.get("num_gpu", 0)
         self.json_mode = bool(lcfg.get("json_mode", True))
         self.enabled = bool(lcfg.get("enabled", True))
         self._available: bool | None = None
@@ -93,6 +95,12 @@ class OllamaClient:
         return self._available
 
     def _chat(self, system: str, user: str, model: str | None = None) -> str | None:
+        options: dict[str, Any] = {
+            "temperature": self.temperature,
+            "num_ctx": self.num_ctx,
+        }
+        if self.num_gpu is not None:
+            options["num_gpu"] = int(self.num_gpu)
         payload = {
             "model": model or self.model,
             "messages": [
@@ -100,7 +108,7 @@ class OllamaClient:
                 {"role": "user", "content": user},
             ],
             "stream": False,
-            "options": {"temperature": self.temperature, "num_ctx": self.num_ctx},
+            "options": options,
         }
         if self.json_mode:
             payload["format"] = "json"

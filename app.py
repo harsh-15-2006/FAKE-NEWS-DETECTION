@@ -99,6 +99,14 @@ llm_only_ambiguous = st.sidebar.checkbox(
     "Skip LLM when a prior debunk already decides", value=True
 )
 llm_timeout = st.sidebar.slider("LLM timeout (s)", 15, 180, 90, step=15)
+llm_ctx = st.sidebar.select_slider("Context size", [1024, 2048, 4096], value=2048)
+llm_num_gpu = st.sidebar.number_input(
+    "GPU layers (0 = CPU only)", min_value=0, max_value=99, value=0, step=1
+)
+st.sidebar.caption(
+    "Keep GPU layers at 0 unless you know Ollama's CUDA build matches your "
+    "driver — a mismatch crashes the model at load time."
+)
 
 st.sidebar.subheader("Grounding validator")
 grounding_on = st.sidebar.checkbox("Enable", value=True)
@@ -129,6 +137,8 @@ cfg = apply_overrides(cfg, {
     "llm.model": llm_model,
     "llm.only_when_ambiguous": llm_only_ambiguous,
     "llm.timeout_s": llm_timeout,
+    "llm.num_ctx": llm_ctx,
+    "llm.num_gpu": int(llm_num_gpu),
     "grounding.enabled": grounding_on,
     "grounding.strictness": strictness,
     "grounding.min_span_chars": min_span,

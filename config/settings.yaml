@@ -48,7 +48,13 @@ llm:
   fallback_model: null
   timeout_s: 90
   temperature: 0.1              # extraction, not creative generation
-  num_ctx: 4096
+  num_ctx: 2048               # measured faster than 4096 on CPU-only hardware
+  # Layers to offload to the GPU. 0 = CPU only, which is what this project
+  # targets. It also works around Ollama crashing at model load with
+  # "CUDA error: device kernel image is invalid" on machines whose GPU driver
+  # or architecture does not match Ollama's CUDA build. Set to null to let
+  # Ollama decide.
+  num_gpu: 0
   json_mode: true
   max_claims: 5                 # cap LLM calls per document
   only_when_ambiguous: true     # skip LLM when an exact prior debunk already decides it
