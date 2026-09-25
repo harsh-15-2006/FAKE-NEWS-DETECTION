@@ -19,5 +19,6 @@ ENV/
 .vscode/
 .idea/
 
-# Large local vector databases (can be generated via python src/ingest.py)
+# Large local vector databases (can be generated via python src/ingest.py or ingestion.py)
 chroma_db/
+chroma_db_evidence/

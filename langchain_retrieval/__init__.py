@@ -1,21 +1,11 @@
-import os
-import sys
-from pathlib import Path
-
-# Add project root to path
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
-
-# Expose clean retrieval function implemented in the LangChain retrieval layer
 from langchain_retrieval.rag_retriever import retrieve_evidence
+from langchain_retrieval.router import route_query
 from langchain_retrieval.retrievers import (
     semantic_search,
     keyword_search,
     hybrid_search,
     get_retriever
 )
-from langchain_retrieval.router import route_query
 from langchain_retrieval.ingestion import ingest_corpus, URLS
 
 __all__ = [
