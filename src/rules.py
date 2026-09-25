@@ -125,7 +125,14 @@ def ml_prior(text: str, rule_score: float, rule_hits: list[str]) -> tuple[float,
     features, carrying 0.15 of the fusion weight. It is labelled as a prior
     everywhere it surfaces, never as a classifier output.
     """
-    words = max(1, len(text.split()))
+    words = len(text.split())
+    if words < 5:
+        # Too short for a density measure to mean anything: 1 signal over 1
+        # word would otherwise read as a very high prior.
+        return 0.0, (
+            f"structural prior withheld: input is {words} word(s), "
+            f"too short for a meaningful density measure"
+        )
     density = len(rule_hits) / (words ** 0.5)
     prior = min(1.0, 0.6 * rule_score + 0.4 * min(1.0, density))
     basis = (

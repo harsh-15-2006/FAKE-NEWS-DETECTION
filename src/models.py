@@ -81,6 +81,7 @@ class Passage:
     resurfaced: bool = False
     resurface_gap_days: int | None = None
     synthetic: bool = False      # True for the labelled sample corpus
+    relevance: float = 0.0       # 0..1 lexical overlap with the claim
 
 
 @dataclass
@@ -92,6 +93,8 @@ class EvidencePack:
     any_resurfaced: bool
     synthetic_only: bool
     errors: list[str] = field(default_factory=list)
+    n_dropped_low_relevance: int = 0
+    min_relevance_applied: float = 0.0
 
 
 @dataclass

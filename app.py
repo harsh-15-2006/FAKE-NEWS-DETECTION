@@ -81,7 +81,15 @@ st.sidebar.subheader("Retrieval")
 backend = st.sidebar.selectbox("Backend", ["hybrid", "api", "offline"], index=0)
 dual_path = st.sidebar.checkbox("Dual-path (native + English)", value=True)
 topk = st.sidebar.slider("Top-K passages", 1, 20, 8)
-min_sources = st.sidebar.slider("Min sources for a verdict", 1, 5, 2)
+min_sources = st.sidebar.slider(
+    "Min sources override (0 = use category policy)", 0, 5, 0
+)
+min_relevance = st.sidebar.slider("Min relevance (gate)", 0.0, 0.6, 0.18, 0.02)
+st.sidebar.caption(
+    "Retrieval always returns its top-K whether or not anything matched. "
+    "Passages below this overlap with the claim are discarded before scoring. "
+    "Set it to 0.0 to see what the system would do without the gate."
+)
 resurface_gap = st.sidebar.slider("Resurfacing gap (days)", 30, 730, 180, step=30)
 
 st.sidebar.subheader("LLM (Ollama)")
@@ -115,7 +123,7 @@ cfg = apply_overrides(cfg, {
     "retrieval.backend": backend,
     "retrieval.dual_path": dual_path,
     "retrieval.topk": topk,
-    "retrieval.evidence_min_sources": min_sources,
+    "retrieval.min_relevance": min_relevance,
     "retrieval.resurface_gap_days": resurface_gap,
     "llm.enabled": llm_on,
     "llm.model": llm_model,
@@ -130,6 +138,9 @@ cfg = apply_overrides(cfg, {
     "scoring.weights.rule": w_rule,
     "claims.checkworthy_threshold": checkworthy,
 })
+
+if min_sources:
+    cfg["_override_min_sources"] = min_sources
 
 api_key = resolve_api_key(None)
 
@@ -284,8 +295,16 @@ if run and text.strip():
             st.caption(
                 f"strategy `{ev.strategy_used}` · paths "
                 f"`{', '.join(ev.paths_queried) or 'none'}` · "
-                f"{ev.n_unique} unique passage(s)"
+                f"{ev.n_unique} relevant passage(s)"
             )
+            if ev.n_dropped_low_relevance:
+                st.info(
+                    f"**Relevance gate discarded {ev.n_dropped_low_relevance} "
+                    f"retrieved passage(s)** that were not about this claim "
+                    f"(below {ev.min_relevance_applied}). Retrieval rank is not "
+                    f"relevance — without this gate they would have counted as "
+                    f"evidence."
+                )
             for err in ev.errors:
                 st.warning(err)
             if not ev.passages:
@@ -299,6 +318,7 @@ if run and text.strip():
                 suffix = f"  ·  **{' · '.join(flags)}**" if flags else ""
                 st.markdown(
                     f"**[{p.pid}] {p.publisher}** — rating: `{p.rating or 'n/a'}`"
+                    f"  ·  relevance `{p.relevance:.2f}`"
                     f"  ·  lang `{p.language or '?'}`  ·  src `{p.source}`{suffix}"
                 )
                 st.markdown(f"> {p.text}")

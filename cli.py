@@ -64,6 +64,10 @@ def build_parser() -> argparse.ArgumentParser:
                      help="days back to search the debunk corpus")
     ret.add_argument("--resurface-gap-days", type=int, default=None)
     ret.add_argument("--evidence-min-sources", type=int, default=None)
+    ret.add_argument("--min-relevance", type=float, default=None,
+                     help="drop retrieved passages whose content-token overlap "
+                          "with the claim is below this (retrieval rank is not "
+                          "relevance)")
     ret.add_argument("--router-strategy",
                      choices=["auto", "keyword", "semantic", "hybrid"], default=None)
 
@@ -148,6 +152,7 @@ def main(argv: list[str] | None = None) -> int:
         "retrieval.prior_debunk_window_days": args.prior_debunk_window,
         "retrieval.resurface_gap_days": args.resurface_gap_days,
         "retrieval.evidence_min_sources": args.evidence_min_sources,
+        "retrieval.min_relevance": args.min_relevance,
         "claims.checkworthy_threshold": args.checkworthy_threshold,
         "claims.max_claims_per_doc": args.max_claims,
         "llm.model": args.llm_model,
@@ -174,6 +179,9 @@ def main(argv: list[str] | None = None) -> int:
     cfg = apply_overrides(cfg, overrides)
     if args.router_strategy:
         cfg["_forced_strategy"] = args.router_strategy
+    if args.evidence_min_sources:
+        # Category policy sets this per category; an explicit flag overrides it.
+        cfg["_override_min_sources"] = args.evidence_min_sources
 
     api_key = resolve_api_key(args.api_key)
     if not api_key and cfg["retrieval"]["backend"] in ("api", "hybrid"):
@@ -236,9 +244,14 @@ def main(argv: list[str] | None = None) -> int:
             for p in r.evidence.passages:
                 tag = " [SYNTHETIC SAMPLE]" if p.synthetic else ""
                 res = f" [RESURFACED +{p.resurface_gap_days}d]" if p.resurfaced else ""
-                print(f"    [{p.pid}] {p.publisher} — {p.rating}{tag}{res}")
+                print(f"    [{p.pid}] rel={p.relevance:.2f}  {p.publisher} — "
+                      f"{p.rating}{tag}{res}")
                 if p.url:
                     print(f"        {p.url}")
+        if r.evidence.n_dropped_low_relevance:
+            print(f"    (relevance gate dropped "
+                  f"{r.evidence.n_dropped_low_relevance} unrelated passage(s) "
+                  f"below {r.evidence.min_relevance_applied})")
         for e in r.evidence.errors:
             print(f"    ! {e}")
 

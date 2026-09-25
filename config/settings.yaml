@@ -32,6 +32,11 @@ retrieval:
   resurface_gap_days: 180
   topk: 8
   rrf_k: 60
+  # RELEVANCE GATE. Retrieval always returns its top-k whether or not anything
+  # actually matched, so passages below this containment score are dropped
+  # before scoring. Without it, an unrelated top-ranked fact-check counts as
+  # evidence and the system will confidently refute anything.
+  min_relevance: 0.18
   offline_cache: "cache/claimreview.json"
   sample_corpus: "cache/sample_corpus.json"
   evidence_min_sources: 2

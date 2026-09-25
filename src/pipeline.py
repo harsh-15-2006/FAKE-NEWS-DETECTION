@@ -33,12 +33,25 @@ from .models import ClaimResult, Report, Signals, Verdict
 from .retrieve import retrieve
 
 
+STRONG_MATCH_RELEVANCE = 0.45
+
+
 def _exact_debunk_present(evidence, policy) -> bool:
-    """True when the corpus already contains a clearly-rated review from a
-    recognised publisher. Used by llm.only_when_ambiguous: if a prior debunk
-    already decides it, spending 20s of CPU to re-derive that is waste."""
+    """True when the corpus already contains a clearly-rated review that is a
+    STRONG lexical match for this claim. Used by llm.only_when_ambiguous: if a
+    prior debunk already decides it, spending CPU to re-derive that is waste.
+
+    The relevance floor is essential. Skipping the LLM on a merely-rated but
+    weakly-matching passage removes the one component that would have answered
+    NOT_IN_CONTEXT, and the claim then gets a confident verdict from evidence
+    that was never about it.
+    """
     need = int(policy.get("evidence_min_sources", 2))
-    rated = [p for p in evidence.passages if score_mod.rating_direction(p.rating) != 0]
+    rated = [
+        p for p in evidence.passages
+        if score_mod.rating_direction(p.rating) != 0
+        and p.relevance >= STRONG_MATCH_RELEVANCE
+    ]
     return len(rated) >= need
 
 
@@ -92,6 +105,12 @@ def analyze(text: str, cfg: dict[str, Any], api_key: str | None = None,
             cfg.get("_forced_strategy"),
         )
         policy["category_keyword_hits"] = cat_hits
+        # An explicit CLI/UI override beats the category default, otherwise the
+        # flag would silently do nothing because category policy always wins.
+        override_min = cfg.get("_override_min_sources")
+        if override_min:
+            policy["evidence_min_sources"] = int(override_min)
+            policy["evidence_min_sources_overridden"] = True
         signals = Signals(
             rule_score=rule_score, rule_hits=rule_hits,
             ml_score=ml_score, ml_basis=ml_basis,

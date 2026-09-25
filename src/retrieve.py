@@ -66,6 +66,49 @@ def _tokenize(text: str) -> list[str]:
     ).split() if t]
 
 
+_STOP = {
+    "the", "a", "an", "and", "or", "but", "of", "to", "in", "on", "at", "for",
+    "with", "by", "from", "as", "is", "are", "was", "were", "be", "been",
+    "has", "have", "had", "will", "would", "can", "could", "that", "this",
+    "these", "those", "it", "its", "his", "her", "their", "he", "she", "they",
+    "not", "no", "claim", "claims", "claimed", "video", "photo", "image",
+    "shows", "showing", "viral", "fact", "check", "rating", "review", "title",
+    "reviewed", "publisher", "says", "said",
+}
+
+
+def _content_tokens(text: str) -> set[str]:
+    """Tokens that actually carry topic. Stopwords and very short tokens are
+    dropped, as are the scaffolding words that appear in every passage
+    ('claim reviewed', 'rating by', 'review title') — otherwise every passage
+    looks superficially similar to every claim."""
+    return {t for t in _tokenize(text) if len(t) >= 3 and t not in _STOP}
+
+
+def relevance(claim_variants: list[str], passage_text: str) -> float:
+    """Is this passage actually ABOUT the claim?
+
+    Containment of the claim's content tokens in the passage, taking the best
+    score across the claim's language variants (native and English pivot) so a
+    Tamil claim can match an English passage through its translation.
+
+    This gate exists because retrieval ALWAYS returns its top-k, relevant or
+    not. Without it the score engine treats whatever came back as evidence —
+    which is how a meaningless input once scored REFUTED at 0.80 confidence on
+    four unrelated fact-checks. Retrieval rank is not relevance.
+    """
+    ptoks = _content_tokens(passage_text)
+    if not ptoks:
+        return 0.0
+    best = 0.0
+    for variant in claim_variants:
+        ctoks = _content_tokens(variant)
+        if not ctoks:
+            continue
+        best = max(best, len(ctoks & ptoks) / len(ctoks))
+    return round(best, 3)
+
+
 # ------------------------------------------------------------ API client #
 
 class FactCheckAPI:
@@ -329,16 +372,37 @@ def retrieve(claim_text_native: str, claim_text_en: str, lang_code: str,
     else:
         merged = _rrf_merge(buckets, rrf_k, topk)
 
+    # ---- RELEVANCE GATE ------------------------------------------------ #
+    # Retrieval always returns its top-k whether or not anything matched.
+    # Passages that are not about this claim are dropped here, before the
+    # score engine ever sees them.
+    min_rel = float(rcfg.get("min_relevance", 0.18))
+    variants = [v for v in (claim_text_en, claim_text_native) if v and v.strip()]
+    for p in merged:
+        p.relevance = relevance(variants, p.text)
+
+    before = len(merged)
+    kept = [p for p in merged if p.relevance >= min_rel]
+    dropped = before - len(kept)
+    if dropped:
+        errors.append(
+            f"relevance gate: dropped {dropped} of {before} retrieved passage(s) "
+            f"below min_relevance={min_rel} (retrieval rank is not relevance)"
+        )
+    kept.sort(key=lambda p: p.relevance, reverse=True)
+
     # Renumber so passage ids are contiguous and match what the LLM is shown.
-    for new_id, p in enumerate(merged):
+    for new_id, p in enumerate(kept):
         p.pid = new_id
 
     return EvidencePack(
-        passages=merged,
+        passages=kept,
         strategy_used=strategy,
         paths_queried=paths,
-        n_unique=len(merged),
-        any_resurfaced=any(p.resurfaced for p in merged),
-        synthetic_only=bool(merged) and all(p.synthetic for p in merged),
+        n_unique=len(kept),
+        any_resurfaced=any(p.resurfaced for p in kept),
+        synthetic_only=bool(kept) and all(p.synthetic for p in kept),
         errors=errors,
+        n_dropped_low_relevance=dropped,
+        min_relevance_applied=min_rel,
     )

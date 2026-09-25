@@ -173,16 +173,24 @@ def decide(claim: Claim, signals: Signals, evidence: EvidencePack,
     # --- GATE 2: not enough evidence ----------------------------------- #
     need = int(policy.get("evidence_min_sources", 2))
     if evidence.n_unique < need:
+        rel_msg = ""
+        if evidence.n_dropped_low_relevance:
+            rel_msg = (
+                f" {evidence.n_dropped_low_relevance} retrieved passage(s) were "
+                f"discarded because they were not about this claim "
+                f"(relevance below {evidence.min_relevance_applied}). Retrieval "
+                f"rank is not relevance."
+            )
         detail_msg = (
-            f" Retrieval errors: {'; '.join(evidence.errors)}."
+            f" Retrieval notes: {'; '.join(evidence.errors)}."
             if evidence.errors else ""
         )
         return result(
             Verdict.INSUFFICIENT_EVIDENCE, "gate_2_min_sources",
-            f"Found {evidence.n_unique} independent source(s); this category "
-            f"requires {need}. No published fact-check was located in "
-            f"{claim.lang_code} or English. This system does not guess."
-            f"{detail_msg}",
+            f"Found {evidence.n_unique} relevant source(s); this category "
+            f"requires {need}. No published fact-check about this claim was "
+            f"located in {claim.lang_code} or English. This system does not "
+            f"guess.{rel_msg}{detail_msg}",
             0.0,
         )
 
